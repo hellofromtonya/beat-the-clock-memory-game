@@ -1,0 +1,150 @@
+/*
+ * Game Screen
+ *-------------------------------------*/
+
+.screen-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    text-align: center;
+}
+
+.screen.--game .header-panel {
+    font-size: 13px;
+    text-align: center;
+}
+
+.header-panel.--game-clock h2,
+.screen.--game .header-panel span,
+.score-ratio .fa {
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.header-panel,
+.section-nav li {
+    display: inline-block;
+}
+
+.section-nav ul {
+    padding: 0;
+    margin: 0 10px 0 0;
+}
+
+.section-nav li {
+    list-style: none;
+}
+
+/** Game clock **/
+
+.time-remaining {
+    width: 70px;
+    height: 70px;
+    display: block;
+    background-color: #2e3d49;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 22px;
+    line-height: 50px;
+    text-align: center;
+}
+
+/** Game Footer Navigation **/
+.section-nav li {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #2e3d49;
+}
+
+.section-nav li:hover {
+    background-color: #cc0000;
+}
+
+.section-nav .fa,
+.section-nav a {
+    color: #fff;
+    border-bottom: none;
+}
+
+
+/*
+ * Deck and Cards
+ *-------------------------------------*/
+
+.deck {
+    padding: 0;
+    margin: 0 auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deck .card {
+    height: 20vw;
+    width: 20vw;
+    margin-bottom: 2vw;
+    background-color: #2e3d49;
+
+    font-size: 0;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    cursor: pointer;
+
+    /** center the symbol in the card */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /** flip animation */
+    transition: 0.7s;
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+}
+
+/** Card Flipper **/
+
+.deck .card.open {
+    transform: rotateY(0);
+    background: #02b3e4;
+}
+
+.deck .card.show,
+.deck .card.match {
+    cursor: default;
+    font-size: 33px;
+}
+
+.deck .card.match {
+    background: #02ccba;
+    animation: 1s rubberBand;
+}
+
+.deck .card.mismatch {
+    background-color: #cc0000;
+    animation: 1s wobble;
+}
+
+@media screen and (min-width: 768px) {
+    .deck .card {
+        height: 125px;
+        width: 23%;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .deck .card {
+        height: 150px;
+        width: 150px;
+    }
+}

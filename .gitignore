@@ -1,0 +1,6 @@
+.htmlhintrc
+.stylelintrc
+.eslintrc.json
+
+.idea/
+course-resources/

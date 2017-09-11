@@ -1,0 +1,136 @@
+/*
+ * Base Defaults
+ *-------------------------------------*/
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+    background: #fff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-size: 16px;
+    line-height: 1.625;
+    font-family: 'Coda', cursive;
+    font-weight: 400;
+    text-align: left;
+}
+
+/*
+ * Typography
+ *-------------------------------------*/
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.25;
+    margin: 0 0 20px;
+}
+
+h1 {
+    font-size: 28px;
+    font-size: 2.8rem;
+}
+
+h2 {
+    font-size: 24px;
+    font-size: 2.4rem;
+}
+
+h3 {
+    font-size: 22px;
+    font-size: 2.2rem;
+}
+
+h4 {
+    font-size: 20px;
+    font-size: 2.0rem;
+}
+
+p {
+    margin: 0 0 20px;
+}
+
+a,
+a:active,
+a:focus,
+a:hover {
+    outline: none;
+}
+
+a {
+    color: #02b3e4;
+    transition: all 0.1s ease-in-out;
+    text-decoration: none;
+    border-bottom: 1px dotted;
+    word-wrap: break-word;
+}
+
+a:hover {
+    color: #cb4b14;
+    border-bottom: none;
+}
+
+/*
+ * Layout
+ *-------------------------------------*/
+
+.screen {
+    position: relative;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin: 0 auto;
+    padding: 0;
+    width: 90%;
+
+    perspective: 1000px;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+
+.screen-header,
+.screen-footer,
+.screen-content {
+    width: 100%;
+    min-height: 50px;
+    margin: 10px auto;
+    padding: 0;
+}
+
+.screen-header p,
+.screen-footer p {
+    margin-bottom: 0;
+}
+
+.hide {
+    display: none;
+}
+
+.--block {
+    display: block;
+}
+
+
