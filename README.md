@@ -4,7 +4,7 @@ This game tests your memory and challenges you to match the cards in as few move
 
 ## How to Play
 
-[Click here](https://rawgit.com/hellofromtonya/ufend-memory-game/master/index.html) to load the game into your browser.
+[Click here](https://rawgit.com/hellofromtonya/beat-the-clock-memory-game/master/index.html) to load the game into your browser.
 
 You are given 16 cards. The deck is made up of 8 different pairs of cards. The cards are arranged randomly on the grid with the symbol face down.
 

@@ -135,14 +135,22 @@
     animation: 1s wobble;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 600px) {
+    .deck {
+        max-width: 580px;
+    }
+
     .deck .card {
         height: 125px;
-        width: 23%;
+        width: 125px;
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1400px) {
+    .deck {
+        max-width: 680px;
+    }
+
     .deck .card {
         height: 150px;
         width: 150px;
