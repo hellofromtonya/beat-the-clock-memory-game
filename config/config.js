@@ -1,20 +1,20 @@
 const getGameConfig = function() {
 
     return {
-        gameControls: {
+        gameClock: {
             timeInterval: 1000,
-            timeOut: 2,
+            timeOut: 120, // 120 seconds
         },
 
         gameController: {
-
             numCards: 16,
             numMatches: 2,
+        },
 
-            card: {
-                positionOnBoard: 0,
-                iconClassName: 'fa',
-            },
+        card: {
+            positionOnBoard: 0,
+            cardClassName: 'card',
+            iconClassName: 'fa',
         },
 
         cardSymbols: {
@@ -55,7 +55,17 @@ const getGameConfig = function() {
             ],
         },
 
-        userModel: {},
+        playerModel: {
+            thresholds: {
+                consecutiveMatch: 2,
+                consecutiveMisses: 3
+            },
+            scoring: {
+                match: 10,
+                consecutiveMatch: 100,
+                consecutiveMisses: -100,
+            }
+        },
 
         view: {
             cardParentClassName: 'deck',

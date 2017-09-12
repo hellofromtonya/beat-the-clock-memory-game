@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * @description Game View
+ *
+ * @param {Object} config Runtime configuration parameters
+ *
+ * @constructor
+ */
 const View = function(config) {
     this.config = config;
 
@@ -7,6 +14,7 @@ const View = function(config) {
         body: document.getElementsByTagName('body')[0],
         deck: document.getElementsByClassName(this.config.cardParentClassName)[0],
         moves: document.getElementsByClassName('moves')[0],
+        score: document.getElementsByClassName('score')[0],
         gameOverModal: document.getElementById('game-over-modal'),
         timedOutModal: document.getElementById('timed-out'),
         stars: document.querySelectorAll('.stars li'),
@@ -14,6 +22,11 @@ const View = function(config) {
     };
 };
 
+/**
+ * @description Reset the Game Board.
+ *
+ * @method
+ */
 View.prototype.resetGame = function() {
     this.elements.moves.innerHTML = '0';
     this.updateStars(3);
@@ -22,24 +35,26 @@ View.prototype.resetGame = function() {
     // board reset itself.
     if (this.elements.gameOverModal.classList.contains('active') ||
         this.elements.timedOutModal.classList.contains('active')) {
-        window.setTimeout(this.hideModal.bind(this), 1200);
+        window.setTimeout(this.hideModal.bind(this), 1100);
     }
 };
 
 View.prototype.updateMoves = function(numberMoves) {
-    this.elements.moves.innerHTML = numberMoves.toString();
+    this.elements.moves.innerHTML = numberMoves;
 };
 
-View.prototype.updateUserStats = function(numberMoves) {
-    this.elements.moves.innerHTML = numberMoves.toString();
+View.prototype.updateScore = function(score) {
+    this.elements.score.innerHTML = score;
 };
 
-View.prototype.showGameOver = function (numberMoves, numberStars = 0) {
+View.prototype.showGameOver = function (numberMoves = 0, numberStars = 3, gameTime = 0) {
     const movesEl = this.elements.gameOverModal.getElementsByClassName('modal-number-moves')[0];
     const starEl = this.elements.gameOverModal.getElementsByClassName('modal-number-stars')[0];
+    const gameTimeEl = this.elements.gameOverModal.getElementsByClassName('modal-game-time')[0];
 
-    movesEl.innerHTML = numberMoves.toString();
-    starEl.innerHTML = numberStars.toString();
+    movesEl.innerHTML = numberMoves;
+    starEl.innerHTML = numberStars == 1 ? '1 star' : `${numberStars} stars`;
+    gameTimeEl.innerHTML = gameTime;
 
     // Show the modal
     this.elements.gameOverModal.classList.add('active');

@@ -3,7 +3,7 @@
 /**
  * @description Card Symbols Handler
  *
- * @param {Array} config Runtime configuration parameters
+ * @param {Object} config Runtime configuration parameters
  *
  * @constructor
  */

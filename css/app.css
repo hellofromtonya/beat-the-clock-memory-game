@@ -110,7 +110,6 @@ a:hover {
     transition: transform 0.5s;
 }
 
-
 .screen-header,
 .screen-footer,
 .screen-content {
@@ -132,5 +131,3 @@ a:hover {
 .--block {
     display: block;
 }
-
-
