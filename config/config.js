@@ -58,19 +58,19 @@ const getGameConfig = function() {
         playerModel: {
             thresholds: {
                 consecutiveMatch: 2,
-                consecutiveMisses: 3
+                consecutiveMisses: 3,
+                consecutiveMatchBonus: 3
             },
             scoring: {
                 match: 10,
                 consecutiveMatch: 100,
                 consecutiveMisses: -100,
+                consecutiveMatchBonus: 1000
             }
         },
 
         view: {
             cardParentClassName: 'deck',
-            PLACEHOLDER: '{%symbol%}',
-            cardHTML: '<li class="card">' + "\n" + '<i class="fa {%symbol%}" aria-hidden="true"></i>' + "\n" + '</li>',
             deckDimensions: {
                 width: 165,
                 height: 170

@@ -18,7 +18,7 @@
 
 .header-panel.--game-clock h2,
 .screen.--game .header-panel span,
-.score-ratio .fa {
+.stars .fa {
     font-size: 18px;
     margin-bottom: 0;
 }

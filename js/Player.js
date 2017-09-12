@@ -17,8 +17,8 @@ PlayerModel.prototype.resetStats = function() {
     this._numberConsecutiveMatches = 0;
     this._numberConsecutiveMisses = 0;
     this._ratio = 1;
-    this._numberStars = 0;
-    this._starsChanged = false;
+    this._numberStars = 3;
+    this._haveStarsChanged = false;
 
     this._score = 0;
     this._level = 1;
@@ -90,7 +90,7 @@ PlayerModel.prototype.getStars = function() {
  * @method
  */
 PlayerModel.prototype.haveStarsChanged = function() {
-    return this._starsChanged;
+    return this._haveStarsChanged;
 };
 
 /**
@@ -131,8 +131,14 @@ PlayerModel.prototype.setMatched = function(gameClock) {
 
     this._score = this.config.scoring.match;
 
+    // Once player reaches consecutive match threshold, award the progressive points.
     if (this._numberConsecutiveMatches >= this.config.thresholds.consecutiveMatch) {
-        this._score += this.config.scoring.consecutiveMatch;
+        this._score += this.config.scoring.consecutiveMatch * this._numberConsecutiveMatches;
+    }
+
+    // Once player reaches the bonus round, award the progressive bonus points.
+    if (this._numberConsecutiveMatches >= this.config.thresholds.consecutiveMatchBonus) {
+        this._score += this.config.scoring.consecutiveMatchBonus * (this.config.thresholds.consecutiveMatchBonus - this._numberConsecutiveMatches + 1);
     }
 
     this.setStars(gameClock);
@@ -143,31 +149,38 @@ PlayerModel.prototype.setMatched = function(gameClock) {
  *
  * TODO - Integrate the time into the performance calculator.
  *
- * @param {Number} gameClock Running game clock of time left on the clock
+ * @param {Number} percentageTimeRemaining Running game clock of time left on the clock
  *
  * @method
  */
-PlayerModel.prototype.setStars = function(gameClock) {
-
-    if (this._numberMoves < 3) {
+PlayerModel.prototype.setStars = function(percentageTimeRemaining) {
+    if (this._numberMoves < 4) {
         return;
     }
 
-    this._ratio = this._numberMatches / this._numberMoves;
+    this._ratio = (this._numberMatches / this._numberMoves) * percentageTimeRemaining;
+
+    console.log(this._ratio, this._numberMoves, percentageTimeRemaining);
 
     let newStars = 3;
 
-    if (this._ratio >= 0.5) {
+    if (this._numberMoves < 7) {
         newStars = 2;
-    } else if (this._ratio >= 0.25) {
-        newStars = 1;
-    } else if (this._ratio < 0.25) {
-        newStars = 0;
+
+    } else {
+
+        if (this._ratio >= 0.5) {
+            newStars = 2;
+        } else if (this._ratio >= 0.25) {
+            newStars = 1;
+        } else if (this._ratio < 0.25) {
+            newStars = 0;
+        }
     }
 
-    this._starsChanged = newStars !== this._numberStars;
+    this._haveStarsChanged = newStars !== this._numberStars;
 
-    if (this._starsChanged) {
+    if (this._haveStarsChanged) {
         this._numberStars = newStars;
     }
 };

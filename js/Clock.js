@@ -9,7 +9,7 @@
  * @constructor
  */
 const GameClock = function(config, Controller) {
-    this.config = config;
+    this._config = config;
     this.controller = Controller;
     this._timeInterval = null;
     this._timeRemaining = config.timeOut;
@@ -25,7 +25,20 @@ const GameClock = function(config, Controller) {
  * @returns {Number}
  */
 GameClock.prototype.getGameTime = function() {
-    return this.config.timeOut - this._timeRemaining;
+    return this._config.timeOut - this._timeRemaining;
+};
+
+/**
+ * @description Returns the percentage of time remaining.
+ *
+ * @returns {Number}
+ */
+GameClock.prototype.getPercentTimeRemaining = function() {
+
+    const percent = Math.ceil((this._timeRemaining / this._config.timeOut) * 100);
+    console.log('getPercentTimeRemaining', this._timeRemaining, this._config.timeOut, percent);
+
+    return percent;
 };
 
 /**
@@ -55,7 +68,7 @@ GameClock.prototype.isRunning = function() {
  */
 GameClock.prototype.start = function(timeOut = 0) {
 
-    timeOut = timeOut || this.config.timeOut;
+    timeOut = timeOut || this._config.timeOut;
 
     this._timeInterval = setInterval(function(){
         this._timeRemaining--;
@@ -89,7 +102,7 @@ GameClock.prototype.stop = function() {
 GameClock.prototype.reset = function(timeOut = 0) {
     this.stop();
 
-    timeOut = timeOut || this.config.timeOut;
+    timeOut = timeOut || this._config.timeOut;
 
     this.elements.timeRemaining.innerHTML = timeOut.toString();
 

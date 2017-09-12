@@ -258,7 +258,7 @@ GameController.prototype.setMatched = function(cardsInPlay) {
  * @method
  */
 GameController.prototype.setMismatched = function(cardsInPlay) {
-    this.player.setMismatched(this.gameClock.getTimeRemaining());
+    this.player.setMismatched(this.gameClock.getPercentTimeRemaining());
 
     cardsInPlay.forEach(function(index){
         this._cards[index].hideCard();
@@ -285,12 +285,11 @@ GameController.prototype.isGameOver = function() {
 GameController.prototype.gameOver = function() {
     this.gameClock.stop();
 
-    this.view.showGameOver(this.player.getNumberMatches(), this.player.getStars(), this.gameClock.getGameTime());
+    console.log('Game stats', this.gameClock.getGameTime(), this.player.getNumberMoves(), this.player.getStars(), this.player.getScore());
 
-    // hide all cards
-    this.cards.forEach(function(index){
-        this._cards[index].hideCard(false);
-    }, this);
+    this.view.showGameOver(this.player.getNumberMoves(), this.player.getStars(), this.gameClock.getGameTime());
+
+    this.hideAllCards();
 };
 
 /**
@@ -301,8 +300,11 @@ GameController.prototype.gameOver = function() {
 GameController.prototype.timeOut = function() {
     this.view.showTimedOut();
 
-    // hide all cards
-    this.cards.forEach(function(index){
-        this._cards[index].hideCard(false);
+    this.hideAllCards();
+};
+
+GameController.prototype.hideAllCards = function() {
+    this._cards.forEach(function(card){
+        card.hideCard(false);
     }, this);
 };
