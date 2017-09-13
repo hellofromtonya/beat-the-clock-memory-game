@@ -240,7 +240,7 @@ GameController.prototype.areMatched = function(cardsInPlay) {
  * @method
  */
 GameController.prototype.setMatched = function(cardsInPlay) {
-    this.player.setMatched(this.gameClock.getTimeRemaining());
+    this.player.setMatched();
 
     cardsInPlay.forEach(function(index) {
         this._cards[index].setMatched();
@@ -256,7 +256,7 @@ GameController.prototype.setMatched = function(cardsInPlay) {
  * @method
  */
 GameController.prototype.setMismatched = function(cardsInPlay) {
-    this.player.setMismatched(this.gameClock.getPercentTimeRemaining());
+    this.player.setMismatched();
 
     cardsInPlay.forEach(function(index) {
         this._cards[index].hideCard();

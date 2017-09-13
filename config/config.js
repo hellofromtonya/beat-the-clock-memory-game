@@ -63,16 +63,36 @@ const getGameConfig = function() {
             consecutiveMatchBonus: 3
         },
         scoring: {
-            match: 10,
-            consecutiveMatch: 100,
-            consecutiveMisses: -100,
-            consecutiveMatchBonus: 1000
+            match: 100,
+            consecutiveMatch: 1000,
+            consecutiveMisses: -1000,
+            consecutiveMatchBonus: 10000
         },
+        starsRules: [
+            // 1 star minimum
+            {
+                minMoves: 21,
+                minScore: 4800,
+            },
+            // 2 stars minimum
+            {
+                minMoves: 17,
+                minScore: 4800,
+            },
+            // 3 stars minimum
+            {
+                minMoves: 13,
+                minScore: 20000,
+            }
+        ],
         levelUpRules: {
             timeouts: config.gameClock.timeOuts,
-            score: 1000,
-            stars: 2,
-            gameTimeOffset: 0.80 // 80% of the timeout clock
+            minMoves: 8, // Won the game in at least 8 moves, i.e. to ensure s/he played.
+
+            // if the play won with these stats, then level up:
+            moves: 13,
+            score: 20000,
+            stars: 3
         }
     };
 

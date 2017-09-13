@@ -31,6 +31,7 @@ PlayerModel.prototype.resetStats = function(hardReset = false) {
     this._stars = 3;
     this._score = 0;
     this._haveStarsChanged = false;
+    this.playing = false;
 
     if (hardReset === true) {
         this._level = 1;
@@ -39,14 +40,12 @@ PlayerModel.prototype.resetStats = function(hardReset = false) {
     // Leveling Up Rules
     this._levelUpRules = {
         timeout: this._config.levelUpRules.timeouts[this._level - 1],
-        timeThreshold: 0,
+        moves: this._config.levelUpRules.moves,
         score: this._config.levelUpRules.score,
         stars: this._config.levelUpRules.stars,
     };
 
-    this._levelUpRules.timeThreshold = this._levelUpRules.timeout * this._config.levelUpRules.gameTimeOffset;
-
-    return this.tallyGameStats(0);
+    return this.tallyGameStats(0, true);
 };
 
 /**
@@ -59,7 +58,7 @@ PlayerModel.prototype.resetStats = function(hardReset = false) {
  * @method
  */
 PlayerModel.prototype.tallyGameStats = function(gameTimeSeconds, skipLevelUp = false) {
-    const canLevelUp = ! skipLevelUp ? this.canLevelUp(gameTimeSeconds) : false;
+    const canLevelUp = ! skipLevelUp ? this.canLevelUp() : false;
 
     if (canLevelUp) {
         this._level++;
@@ -79,23 +78,14 @@ PlayerModel.prototype.tallyGameStats = function(gameTimeSeconds, skipLevelUp = f
 /**
  * @description Checks if the player can level up
  *
- * @param {Number} gameTimeSeconds
  * @returns {Boolean}
  *
  * @method
  */
-PlayerModel.prototype.canLevelUp = function(gameTimeSeconds) {
-
-    if (gameTimeSeconds >= this._levelUpRules.timeThreshold) {
-        return true;
-    }
-
-    if (this._score >= this._levelUpRules.score &&
-        this._stars >= this._levelUpRules.stars) {
-        return true;
-    }
-
-    return false;
+PlayerModel.prototype.canLevelUp = function() {
+    return this._moves <= this._levelUpRules.moves &&
+        this._score >= this._levelUpRules.score &&
+        this._stars >= this._levelUpRules.stars;
 };
 
 /**
@@ -169,15 +159,14 @@ PlayerModel.prototype.haveStarsChanged = function() {
 /**
  * @description Sets a card mismatch.
  *
- * @param {Number} gameClock Running game clock of time left on the clock
- *
  * @method
  */
-PlayerModel.prototype.setMismatched = function(gameClock) {
+PlayerModel.prototype.setMismatched = function() {
     this._moves++;
     this._consecutiveMisses++;
     this._consecutiveMatches = 0;
 
+    // Once the player misses the consecutive miss threshold, deduct points.
     if (this._consecutiveMisses >= this._config.thresholds.consecutiveMisses) {
         this._score += this._config.scoring.consecutiveMisses;
     }
@@ -186,23 +175,22 @@ PlayerModel.prototype.setMismatched = function(gameClock) {
         this._score = 0;
     }
 
-    this.setStars(gameClock);
+    this.setStars();
 };
 
 /**
  * @description Sets a card match.
  *
- * @param {Number} gameClock Running game clock of time left on the clock
- *
  * @method
  */
-PlayerModel.prototype.setMatched = function(gameClock) {
+PlayerModel.prototype.setMatched = function() {
     this._moves++;
     this._matches++;
     this._consecutiveMatches++;
     this._consecutiveMisses = 0;
 
-    this._score = this._config.scoring.match;
+    // Add the matching points to the player's score.
+    this._score += this._config.scoring.match;
 
     // Once player reaches consecutive match threshold, award the progressive points.
     if (this._consecutiveMatches >= this._config.thresholds.consecutiveMatch) {
@@ -214,48 +202,28 @@ PlayerModel.prototype.setMatched = function(gameClock) {
         this._score += this._config.scoring.consecutiveMatchBonus * (this._config.thresholds.consecutiveMatchBonus - this._consecutiveMatches + 1);
     }
 
-    this.setStars(gameClock);
+    this.setStars();
 };
 
 /**
  * @description Sets the number of stars, i.e. player performance indicator.
  *
- * TODO - Integrate the time into the performance calculator.
- *
- * @param {Number} percentageTimeRemaining Running game clock of time left on the clock
- *
  * @method
  */
-PlayerModel.prototype.setStars = function(percentageTimeRemaining) {
-    if (this._moves < 4) {
+PlayerModel.prototype.setStars = function() {
+    // Player at minimum. Bail out as there's nothing to do.
+    if (this._stars === 0) {
         return;
     }
 
-    // TODO This needs serious work!!
-
-    this._ratio = (this._matches / this._moves) * percentageTimeRemaining;
-
-    console.log(this._ratio, this._moves, percentageTimeRemaining);
-
-    let newStars = 3;
-
-    if (this._moves < 7) {
-        newStars = 2;
-
-    } else {
-
-        if (this._ratio >= 0.5) {
-            newStars = 2;
-        } else if (this._ratio >= 0.25) {
-            newStars = 1;
-        } else if (this._ratio < 0.25) {
-            newStars = 0;
-        }
+    // Reset that the stars changed.
+    if (this._haveStarsChanged) {
+        this._haveStarsChanged = false;
     }
 
-    this._haveStarsChanged = newStars !== this._stars;
-
-    if (this._haveStarsChanged) {
-        this._stars = newStars;
+    if (this._moves === this._config.starsRules[this._stars - 1].minMoves &&
+        this._score < this._config.starsRules[this._stars - 1].minScore) {
+        this._stars--;
+        this._haveStarsChanged = true;
     }
 };

@@ -89,6 +89,11 @@ View.prototype.showGameOver = function(playerStats) {
         if (prop === 'stars') {
             stat = stat === 1 ? '1 star' : `${stat} stars`;
         }
+
+        if (prop === 'score') {
+            stat = stat.toLocaleString();
+        }
+
         html = html.replace(`%${prop}%`, stat);
     }
 

@@ -30,15 +30,6 @@ GameClock.prototype.getActualTime = function() {
 };
 
 /**
- * @description Returns the percentage of time remaining.
- *
- * @returns {Number}
- */
-GameClock.prototype.getPercentTimeRemaining = function() {
-    return Math.ceil((this._timeRemaining / this._allowableTime) * 100);
-};
-
-/**
  * @description Returns the time remaining on the game clock.
  *
  * @returns {Number}
