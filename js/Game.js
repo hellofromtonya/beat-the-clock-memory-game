@@ -124,26 +124,23 @@ GameController.prototype.startNewGame = function() {
     }, this);
 };
 
-GameController.prototype.pauseGame = function() {
-    console.log('pausing the game');
-
-    // TODO - Add code to pause game.
-};
-
 /**
- * @description Start a new game. Handles the tasks to reset everything and
- *              shuffle the card symbols, and then update the cards.
+ * @description Displays the selected screen.
+ *
+ * @param {String} sectionID ID attribute of the screen to display
  *
  * @method
  */
-GameController.prototype.resumeGame = function() {
-    this.startNewGame();
-};
-
 GameController.prototype.loadSection = function(sectionID) {
-    console.log('loading ' + sectionID);
-
-    // TODO - Add code to load the new section.
+    Array.from(document.querySelectorAll('.screen')).map(function(el) {
+        // if this is the right screen, remove the .hide
+        if (el.id === sectionID) {
+            el.classList.remove('hide');
+        // else, hide the screen.
+        } else {
+            el.classList.add('hide');
+        }
+    });
 };
 
 

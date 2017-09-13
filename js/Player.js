@@ -220,10 +220,18 @@ PlayerModel.prototype.setStars = function() {
     if (this._haveStarsChanged) {
         this._haveStarsChanged = false;
     }
+    // Player is not at the next minimum moves threshold. Bail out.
+    if (this._moves !== this._config.starsRules[this._stars - 1].minMoves) {
+        return;
+    }
 
-    if (this._moves === this._config.starsRules[this._stars - 1].minMoves &&
-        this._score < this._config.starsRules[this._stars - 1].minScore) {
+    // Check if the player's score is < the required minimum.
+    // If yes, decrement the stars.
+    if (this._score < this._config.starsRules[this._stars - 1].minScore) {
         this._stars--;
+
+        // Cheap notifier that is used to alert the game
+        // that the star rating has changed.
         this._haveStarsChanged = true;
     }
 };

@@ -124,6 +124,10 @@ a:hover {
     margin-bottom: 0;
 }
 
+.screen .game-control {
+    cursor: pointer;
+}
+
 .hide {
     display: none;
 }

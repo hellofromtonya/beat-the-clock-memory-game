@@ -1,53 +1,67 @@
 # Beat the Clock Memory Game
 
-This game tests your memory and challenges you to match the cards in as few moves as possible while beating the clock.
+This game tests your memory and challenges you to match the cards in as few moves as possible before the game clock runs out.
+
+You can play the game in your browser by [clicking here](https://rawgit.com/hellofromtonya/beat-the-clock-memory-game/master/index.html).
 
 ## How to Play
 
 [Click here](https://rawgit.com/hellofromtonya/beat-the-clock-memory-game/master/index.html) to load the game into your browser.
 
-You are given 16 cards. The deck is made up of 8 different pairs of cards. The cards are arranged randomly on the grid with the symbol face down.
+The key to the game is to remember the card symbols and match the pairs in as few tries (moves) as possible.
 
-Each turn:
+Do the following:
 
 - The player flips one card over to reveal its underlying symbol.
 - The player then turns over a second card, trying to find the corresponding card with the same symbol.
-- If the cards match, both cards stay flipped over.
-- If the cards do not match, both cards are flipped face down.
+    - If the cards match, both cards stay flipped over.
+    - If the cards do not match, both cards are flipped face down.
+- Repeat until all cards are matched or the clock runs out.
 
+## Game Overview
 
-The first time a card is clicked within a game, the game's timer starts to countdown.  The objective is to beat the clock while matching the cards in as few moves as possible.
+The game consists of a deck with 8 matching pairs of cards, i.e. for a total of 16 cards.  At the start of a new game, the following happens:
 
-## The Objective
+- Player statistics are reset, except for the level.
+- The Card Symbols array is shuffled, i.e. to add more variation between games.
+- 8 card symbols are selected and then doubled.
+- The new deck is shuffled.
+- Each card's symbol is updated in its respective `card` object.
 
-The objectives are:
+Once the player clicks on a card, the game clock starts counting down in seconds.  During play, the player selects a pair of cards.  The game checks if the pair's symbols match. 
 
-1. Match all 16 cards before the game clock runs out.
-2. Match all of the cards in as few moves as possible.
+- If yes, the following happens:
+    - the cards are animated to visually alert the player of the match
+    - points are awarded
+    - the cards remain face up
+    
+- If no, the following happens:
+    - the cards are animated to visually alert the player of the mismatch
+    - points may be deducted for consecutive misses
+    - cards turned face down again
+    - a star may be removed
+    
+### Scoring
 
-## The Rules
+The game scores based upon the player's performance. Score is managed in the `PlayerModel` and is configurable.
 
-1. Each game is timed.  When the time runs out, the game is over.
-    - The player's score from previous rounds is retained. 
-    - The player does not level up.
-2. If the player missed 3 matches in a row, the round ends.
-    - The player's score from previous rounds is retained. 
-    - The player does not level up.
+- The player wins points when:
+    - Matching a pair of cards awards 100 points
+    - Matching consecutive pairs of cards awards 1000 x the number of consecutive matches (progressive scoring)
 
-## Scoring
-
-
+- When the player has 3 or more consecutive matches, a 10,000 point bonus is awarded.
+- When missing 3 consecutive times, the player loses 1,000 points.
 
 ### How to Level Up
 
+There are multiple levels in this game.  A player can level when:
 
+- wins the game before the clock times out
+- wins with no more than the required number of moves
+- achieves the minimum score
+- wins with the required number of stars
 
-## TODOs
-
-- Please wait on "Play again" as the board resets
-- Add ratio code to drive the stars
-- Add level up features
-- Store progression in the browser to resume play
+All of the above are configurable.
 
 ## Credits
 

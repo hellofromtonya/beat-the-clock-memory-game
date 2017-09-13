@@ -2,8 +2,8 @@
  * Game Screen
  *-------------------------------------*/
 
-.screen-header,
-.screen-footer {
+.screen.--game .screen-header,
+.screen.--game .screen-footer {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -16,7 +16,7 @@
     text-align: center;
 }
 
-.header-panel.--game-clock h2,
+.screen.--game .header-panel.--game-clock h2,
 .screen.--game .header-panel span,
 .stars .fa {
     font-size: 18px;
@@ -54,6 +54,7 @@
 }
 
 /** Game Footer Navigation **/
+
 .section-nav li {
     width: 50px;
     height: 50px;

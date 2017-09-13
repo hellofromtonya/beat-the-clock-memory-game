@@ -102,9 +102,6 @@
     <footer class="screen-footer">
         <nav class="section-nav">
             <ul>
-                <li class="game-control" data-control="pauseGame">
-                    <i class="fa fa-pause" aria-hidden="true" data-pause="fa-pause" data-play="fa-play"></i>
-                </li>
                 <li class="game-control" data-control="startNewGame">
                     <i class="fa fa-repeat" aria-hidden="true"></i>
                 </li>
@@ -116,8 +113,8 @@
     </footer>
 </section>
 
-<!-- Game Over Screen -->
-<section id="game-over-modal" class="screen modal --won-game">
+<!-- 'Game Over' Modal -->
+<section id="game-over-modal" class="modal --won-game">
     <div class="modal-content">
         <div class="loader">
             <i class="fa fa-check" aria-hidden="true"></i>
@@ -132,8 +129,8 @@
 
 </section>
 
-<!-- Game Over Screen -->
-<section id="timed-out" class="screen modal --lost-game">
+<!-- 'You lost' Modal -->
+<section id="timed-out" class="modal --lost-game">
     <div class="modal-content">
         <div class="loader">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
@@ -146,10 +143,44 @@
 </section>
 
 <!-- Help Screen -->
-<section id="help" class="screen hide">
-    <header>
+<section id="help" class="screen --help hide">
+    <header class="screen-header">
+        <nav class="game-control" data-section-id="game">
+            <i class="fa fa-hand-o-left" aria-hidden="true"></i> Back to the Game
+        </nav>
 
+        <h2>Help for Beat the Clock Game</h2>
     </header>
+
+    <div class="screen-content">
+        <p>Welcome to the "Beat the Clock Game."  In this game, you are presented with a deck of 16 cards, which are face down.  Each card has a symbol on it which matches one other card in the deck.</p>
+        <p>Your objective is to match each of the cards before the game clock runs out.</p>
+
+        <h3>How to Play the Game</h3>
+        <ul>
+            <li>Select a card.  The card flips to reveal it's symbol.</li>
+            <li>Remember that card's symbol, as you want to match it.</li>
+            <li>Select a second card, preferably one that matches the flipped over card you selected above.</li>
+            <li>If the two symbols match, you win points and both cards turn green. However, if the cards do not match, the cards are hidden.</li>
+            <li>Repeat until you match all of the cards or the game clock runs out.</li>
+        </ul>
+
+        <p>The game clock starts when you click on a card.  If it times out, then the game stops.</p>
+
+        <h3>Scoring</h3>
+        <p>Each game is scored.  You receive points when you match a pair of cards.  When you match consecutive pairs of cards, you receive a bonus. The more consecutive pairs you match, the higher the bonus points.
+        <p>You lose points when missing consecutive cards.</p>
+
+        <h3>How to Level Up</h3>
+        <p>There are multiple levels in this game.  If you beat the clock in the required number of moves and minimum score, you will automatically advance to the next level.</p>
+    </div>
+
+    <footer class="screen-footer">
+        <nav class="game-control" data-section-id="game">
+            <i class="fa fa-hand-o-left" aria-hidden="true"></i> Back to the Game
+        </nav>
+    </footer>
+
 </section>
 
 <!-- Scripts - typically I would concatenate and minify into one script. -->

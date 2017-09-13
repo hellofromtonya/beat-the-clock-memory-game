@@ -82,7 +82,7 @@ const getGameConfig = function() {
             // 3 stars minimum
             {
                 minMoves: 13,
-                minScore: 20000,
+                minScore: 18000,
             }
         ],
         levelUpRules: {
@@ -91,7 +91,7 @@ const getGameConfig = function() {
 
             // if the play won with these stats, then level up:
             moves: 13,
-            score: 20000,
+            score: 18000,
             stars: 3
         }
     };
