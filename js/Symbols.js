@@ -8,7 +8,7 @@
  * @constructor
  */
 const CardSymbols = function(config) {
-    this.config = config;
+    this._config = config;
     this.symbols = [];
 };
 
@@ -69,9 +69,9 @@ CardSymbols.prototype.buildSymbolsSet = function(setSize, uniqueSetMultipler = 2
  * @method
  */
 CardSymbols.prototype.getUniqueSetOfSymbols = function(numberSymbols) {
-    this.shuffle(this.config.symbols);
+    this.shuffle(this._config.symbols);
 
-    return this.config.symbols.slice(0, numberSymbols);
+    return this._config.symbols.slice(0, numberSymbols);
 };
 
 

@@ -11,7 +11,7 @@ const gameConfig = getGameConfig();
  */
 const buildCards = function(config) {
     // Array of game Card objects
-    return Array.from(document.querySelectorAll('.card')).map(function (el, index) {
+    return Array.from(document.querySelectorAll('.card')).map(function(el, index) {
         config.positionOnBoard = index;
 
         return new Card(

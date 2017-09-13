@@ -9,7 +9,7 @@
  * @constructor
  */
 const GameController = function(config, cards) {
-    this.config = config;
+    this._config = config;
     this._cards = cards;
 
     this.elements = {
@@ -52,18 +52,18 @@ GameController.prototype.initialize = function(gameClock, player, cardSymbols, v
  */
 GameController.prototype.registerEventListeners = function() {
 
-    this.elements.body.addEventListener('click', function(event){
+    this.elements.body.addEventListener('click', function(event) {
         event.stopPropagation();
 
         // Bail out as these are not game clicks.
         if (event.target === event.currentTarget ||
-            ! event.target.matches('.game-control, I, .card, button')) {
+            !event.target.matches('.game-control, I, .card, button')) {
             return false;
         }
 
         // A game control was clicked.
         if (event.target.classList.contains('game-control') ||
-            event.target.nodeName == 'I' && event.target.parentNode.classListcontains('game-control') ) {
+            event.target.nodeName == 'I' && event.target.parentNode.classList.contains('game-control')) {
 
             const el = event.target.nodeName == 'I'
                 ? event.target.parentNode
@@ -72,8 +72,8 @@ GameController.prototype.registerEventListeners = function() {
             if (el.hasAttribute('data-section-id')) {
                 this.loadSection(el.getAttribute('data-section-id'));
 
-            // Call the method.
-            } else if ( el.hasAttribute('data-control')) {
+                // Call the method.
+            } else if (el.hasAttribute('data-control')) {
                 this[el.getAttribute('data-control')]();
             }
 
@@ -81,11 +81,11 @@ GameController.prototype.registerEventListeners = function() {
         }
 
         // A card was clicked.
-        if (event.target.classList.contains('card') && ! event.target.classList.contains('match')) {
+        if (event.target.classList.contains('card') && !event.target.classList.contains('match')) {
             const index = Array.from(event.target.parentNode.children).indexOf(event.target);
 
-            if (! this.gameClock.isRunning()) {
-                this.gameClock.start();
+            if (!this.gameClock.isRunning()) {
+                this.gameClock.start(this.player.getLevel());
             }
 
             this.flipCard(index);
@@ -109,20 +109,18 @@ GameController.prototype.registerEventListeners = function() {
  * @method
  */
 GameController.prototype.startNewGame = function() {
-    this.gameClock.reset();
+    this.gameClock.reset(this.player.getLevel());
 
     this._cardsInPlay = [];
 
-    this.player.resetStats();
-
-    this.view.resetGame();
+    this.view.resetGame(this.player.resetStats());
 
     // shuffle
     this.cardSymbols.shuffleCardSymbols(this._numberCards, this._requiredMatches);
 
     // Update symbol cards.
-    this._cards.forEach(function(card, index){
-        card.setSymbol( this.cardSymbols.symbols[index] );
+    this._cards.forEach(function(card, index) {
+        card.setSymbol(this.cardSymbols.symbols[index]);
     }, this);
 };
 
@@ -161,7 +159,7 @@ GameController.prototype.loadSection = function(sectionID) {
  *
  * @method
  */
-GameController.prototype.flipCard = function (index) {
+GameController.prototype.flipCard = function(index) {
     const card = this._cards[index];
 
     if (card.isMatched() || card.isShowing()) {
@@ -182,7 +180,7 @@ GameController.prototype.flipCard = function (index) {
  *
  * @method
  */
-GameController.prototype.checkMatch = function () {
+GameController.prototype.checkMatch = function() {
     let cardsInPlay = this._cardsInPlay;
 
     if (this.areMatched(cardsInPlay)) {
@@ -244,7 +242,7 @@ GameController.prototype.areMatched = function(cardsInPlay) {
 GameController.prototype.setMatched = function(cardsInPlay) {
     this.player.setMatched(this.gameClock.getTimeRemaining());
 
-    cardsInPlay.forEach(function(index){
+    cardsInPlay.forEach(function(index) {
         this._cards[index].setMatched();
     }, this);
 };
@@ -260,7 +258,7 @@ GameController.prototype.setMatched = function(cardsInPlay) {
 GameController.prototype.setMismatched = function(cardsInPlay) {
     this.player.setMismatched(this.gameClock.getPercentTimeRemaining());
 
-    cardsInPlay.forEach(function(index){
+    cardsInPlay.forEach(function(index) {
         this._cards[index].hideCard();
     }, this);
 };
@@ -285,9 +283,7 @@ GameController.prototype.isGameOver = function() {
 GameController.prototype.gameOver = function() {
     this.gameClock.stop();
 
-    console.log('Game stats', this.gameClock.getGameTime(), this.player.getNumberMoves(), this.player.getStars(), this.player.getScore());
-
-    this.view.showGameOver(this.player.getNumberMoves(), this.player.getStars(), this.gameClock.getGameTime());
+    this.view.showGameOver(this.player.tallyGameStats(this.gameClock.getActualTime()));
 
     this.hideAllCards();
 };
@@ -304,7 +300,7 @@ GameController.prototype.timeOut = function() {
 };
 
 GameController.prototype.hideAllCards = function() {
-    this._cards.forEach(function(card){
+    this._cards.forEach(function(card) {
         card.hideCard(false);
     }, this);
 };

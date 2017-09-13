@@ -12,7 +12,7 @@ const GameClock = function(config, Controller) {
     this._config = config;
     this.controller = Controller;
     this._timeInterval = null;
-    this._timeRemaining = config.timeOut;
+    this.setTimeouts(1);
 
     this.elements = {
         timeRemaining: document.getElementsByClassName('time-remaining')[0]
@@ -20,12 +20,13 @@ const GameClock = function(config, Controller) {
 };
 
 /**
- * @description Returns the game time.
+ * @description Returns the actual game time in seconds,
+ *              i.e. Allowable time - time remaining.
  *
  * @returns {Number}
  */
-GameClock.prototype.getGameTime = function() {
-    return this._config.timeOut - this._timeRemaining;
+GameClock.prototype.getActualTime = function() {
+    return this._allowableTime - this._timeRemaining;
 };
 
 /**
@@ -34,11 +35,7 @@ GameClock.prototype.getGameTime = function() {
  * @returns {Number}
  */
 GameClock.prototype.getPercentTimeRemaining = function() {
-
-    const percent = Math.ceil((this._timeRemaining / this._config.timeOut) * 100);
-    console.log('getPercentTimeRemaining', this._timeRemaining, this._config.timeOut, percent);
-
-    return percent;
+    return Math.ceil((this._timeRemaining / this._allowableTime) * 100);
 };
 
 /**
@@ -60,15 +57,28 @@ GameClock.prototype.isRunning = function() {
 };
 
 /**
- * @description Starts the game clock.
+ * @description Get the starting clock's timeout.
  *
- * @param {Number} timeOut Game's time out time
+ * @param {Number} playerLevel Player's current level: 1-10
+ *
+ * @return {Number}
  *
  * @method
  */
-GameClock.prototype.start = function(timeOut = 0) {
+GameClock.prototype.setTimeouts = function(playerLevel = 1) {
+    this._allowableTime = this._config.timeOuts[playerLevel - 1];
+    this._timeRemaining = this._allowableTime;
+};
 
-    timeOut = timeOut || this._config.timeOut;
+/**
+ * @description Starts the game clock.
+ *
+ * @param {Number} playerLevel Player's current level: 1-10
+ *
+ * @method
+ */
+GameClock.prototype.start = function(playerLevel = 1) {
+    this.setTimeouts(playerLevel);
 
     this._timeInterval = setInterval(function(){
         this._timeRemaining--;
@@ -76,7 +86,7 @@ GameClock.prototype.start = function(timeOut = 0) {
         this.elements.timeRemaining.innerHTML = this._timeRemaining.toString();
 
         if (this._timeRemaining <= 0) {
-            this.reset(timeOut);
+            this.reset(playerLevel);
             this.controller.timeOut();
         }
 
@@ -95,16 +105,16 @@ GameClock.prototype.stop = function() {
 /**
  * @description Resets the game clock.
  *
- * @param {Number} timeOut Game's time out time
+ * @param {Number} playerLevel Player's current level: 1-10
  *
  * @method
  */
-GameClock.prototype.reset = function(timeOut = 0) {
+GameClock.prototype.reset = function(playerLevel = 1) {
     this.stop();
 
-    timeOut = timeOut || this._config.timeOut;
+    this.setTimeouts(playerLevel);
 
-    this.elements.timeRemaining.innerHTML = timeOut.toString();
+    this.elements.timeRemaining.innerHTML = this._allowableTime.toString();
 
     this._timeInterval = null;
 };

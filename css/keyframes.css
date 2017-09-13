@@ -12,6 +12,19 @@
     }
 }
 
+@keyframes riseUp {
+    from {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    100% {
+        -webkit-transform: translateY(-1750px);
+        transform: translateY(-1750px);
+    }
+}
+
 @keyframes rubberBand {
     from {
         transform: scale3d(1, 1, 1);

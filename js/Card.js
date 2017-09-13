@@ -15,7 +15,7 @@ const Card = function(el, config) {
         card: el,
         icon: el.getElementsByClassName(config.iconClassName)[0]
     };
-    this.config = config;
+    this._config = config;
     this._symbol = this.elements.icon.classList[1];
 };
 
