@@ -122,7 +122,7 @@ View.prototype.showTimedOut = function() {
  * @method
  */
 View.prototype.updateStars = function(numberStars) {
-  this.elements.stars.forEach(function(star, index) {
+  this.elements.stars.forEach((star, index) => {
     let toReplace = 'inactive';
     let replaceWith = 'active';
 
@@ -135,7 +135,7 @@ View.prototype.updateStars = function(numberStars) {
       star.classList.remove(this._config.stars[toReplace]);
       star.classList.add(this._config.stars[replaceWith]);
     }
-  }, this);
+  });
 
 };
 

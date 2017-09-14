@@ -71,7 +71,7 @@ GameClock.prototype.setTimeouts = function(playerLevel = 1) {
 GameClock.prototype.start = function(playerLevel = 1) {
   this.setTimeouts(playerLevel);
 
-  this._timeInterval = setInterval(function() {
+  this._timeInterval = setInterval(() => {
     this._timeRemaining--;
 
     this.elements.timeRemaining.innerHTML = this._timeRemaining.toString();
@@ -80,8 +80,7 @@ GameClock.prototype.start = function(playerLevel = 1) {
       this.reset(playerLevel);
       this.controller.timeOut();
     }
-
-  }.bind(this), 1000);
+  }, 1000);
 };
 
 /**

@@ -127,9 +127,9 @@ GameController.prototype.startNewGame = function() {
   this.cardSymbols.shuffleCardSymbols(this._numberCards, this._requiredMatches);
 
   // Update symbol cards.
-  this._cards.forEach(function(card, index) {
+  this._cards.forEach((card, index) => {
     card.setSymbol(this.cardSymbols.symbols[index]);
-  }, this);
+  });
 };
 
 /**
@@ -140,7 +140,7 @@ GameController.prototype.startNewGame = function() {
  * @method
  */
 GameController.prototype.loadSection = function(sectionID) {
-  Array.from(document.querySelectorAll('.screen')).map(function(el) {
+  Array.from(document.querySelectorAll('.screen')).map((el) => {
     // if this is the right screen, remove the .hide
     if (el.id === sectionID) {
       el.classList.remove('hide');
@@ -156,7 +156,7 @@ GameController.prototype.loadSection = function(sectionID) {
  ***********************/
 
 /**
- * @description Flips the card. If there are 0.0.4 in play, then triggers
+ * @description Flips the card. If there are 0.0.5 in play, then triggers
  *              the checkMatch() method.
  *
  * @param {number} index Card index, i.e. position on the board
@@ -223,17 +223,9 @@ GameController.prototype.areMatched = function(cardsInPlay) {
     return false;
   }
 
-  let symbol = this._cards[cardsInPlay[0]].getSymbol();
+  const symbol = this._cards[cardsInPlay[0]].getSymbol();
 
-  for (let index = 1; index < cardsInPlay.length; index++) {
-    let cardIndex = cardsInPlay[index];
-
-    if (symbol !== this._cards[cardIndex].getSymbol()) {
-      return false;
-    }
-  }
-
-  return true;
+  return cardsInPlay.every(cardIndex => symbol === this._cards[cardIndex].getSymbol());
 };
 
 /**
@@ -248,9 +240,9 @@ GameController.prototype.areMatched = function(cardsInPlay) {
 GameController.prototype.setMatched = function(cardsInPlay) {
   this.player.setMatched();
 
-  cardsInPlay.forEach(function(index) {
+  cardsInPlay.forEach((index) => {
     this._cards[index].setMatched();
-  }, this);
+  });
 };
 
 /**
@@ -264,9 +256,9 @@ GameController.prototype.setMatched = function(cardsInPlay) {
 GameController.prototype.setMismatched = function(cardsInPlay) {
   this.player.setMismatched();
 
-  cardsInPlay.forEach(function(index) {
+  cardsInPlay.forEach((index) => {
     this._cards[index].hideCard();
-  }, this);
+  });
 };
 
 /**
@@ -312,7 +304,7 @@ GameController.prototype.timeOut = function() {
  * @method
  */
 GameController.prototype.hideAllCards = function() {
-  this._cards.forEach(function(card) {
+  this._cards.forEach((card) => {
     card.hideCard(false);
-  }, this);
+  });
 };

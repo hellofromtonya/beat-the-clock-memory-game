@@ -36,13 +36,13 @@ CardSymbols.prototype.shuffleCardSymbols = function(numberCards = 16, numberMatc
  *              set based upon the number of matches required.
  *
  * @param {Number} setSize Total number of symbols to be generated
- * @param {Number} uniqueSetMultipler Indicates how many times to duplicate the unique set
+ * @param {Number} uniqueSetMultiplier Indicates how many times to duplicate the unique set
  * @return {Array} Array of symbols
  *
  * @method
  */
-CardSymbols.prototype.buildSymbolsSet = function(setSize, uniqueSetMultipler = 2) {
-  const uniqueSymbols = this.getUniqueSetOfSymbols(setSize / uniqueSetMultipler);
+CardSymbols.prototype.buildSymbolsSet = function(setSize, uniqueSetMultiplier = 2) {
+  const uniqueSymbols = this.getUniqueSetOfSymbols(setSize / uniqueSetMultiplier);
 
   // We know that we want at least the unique symbols set.
   let symbolsSet = uniqueSymbols;
@@ -51,10 +51,10 @@ CardSymbols.prototype.buildSymbolsSet = function(setSize, uniqueSetMultipler = 2
    * Next, add another set to our final set as many times as requested.
    *
    * For example, if the request is for a set that contains the 3 sets of
-   * matching symbols, then this loop runs 0.0.4 times.
+   * matching symbols, then this loop runs 2 times.
    */
-  for (let i = 1; i < uniqueSetMultipler; i++) {
-    symbolsSet = symbolsSet.concat(uniqueSymbols);
+  for (let i = 1; i < uniqueSetMultiplier; i++) {
+    symbolsSet = [...uniqueSymbols, ...symbolsSet];
   }
 
   return symbolsSet;

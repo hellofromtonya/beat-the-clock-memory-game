@@ -93,9 +93,9 @@ Card.prototype.hideCard = function(animateHide = true) {
 
   // Delay 1sec for the animation effect to visually
   // tell the player the cards are mismatched.
-  window.setTimeout(function () {
+  window.setTimeout(() => {
     this.resetCardClassName();
-  }.bind(this), 1000);
+  }, 1000);
 };
 
 /**
