@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * @description Card Symbols Handler
@@ -8,8 +8,8 @@
  * @constructor
  */
 const CardSymbols = function(config) {
-    this._config = config;
-    this.symbols = [];
+  this._config = config;
+  this.symbols = [];
 };
 
 /**
@@ -22,13 +22,13 @@ const CardSymbols = function(config) {
  * @method
  */
 CardSymbols.prototype.shuffleCardSymbols = function(numberCards = 16, numberMatches = 2) {
-    // Step 1: Generate a new set of symbols
-    const currentSymbols = this.buildSymbolsSet(numberCards, numberMatches);
+  // Step 1: Generate a new set of symbols
+  const currentSymbols = this.buildSymbolsSet(numberCards, numberMatches);
 
-    // Step 2: Let's shuffle our symbols set
-    this.symbols = this.shuffle(currentSymbols);
+  // Step 2: Let's shuffle our symbols set
+  this.symbols = this.shuffle(currentSymbols);
 
-    return this.symbols;
+  return this.symbols;
 };
 
 /**
@@ -42,22 +42,22 @@ CardSymbols.prototype.shuffleCardSymbols = function(numberCards = 16, numberMatc
  * @method
  */
 CardSymbols.prototype.buildSymbolsSet = function(setSize, uniqueSetMultipler = 2) {
-    const uniqueSymbols = this.getUniqueSetOfSymbols(setSize / uniqueSetMultipler);
+  const uniqueSymbols = this.getUniqueSetOfSymbols(setSize / uniqueSetMultipler);
 
-    // We know that we want at least the unique symbols set.
-    let symbolsSet = uniqueSymbols;
+  // We know that we want at least the unique symbols set.
+  let symbolsSet = uniqueSymbols;
 
-    /**
-     * Next, add another set to our final set as many times as requested.
-     *
-     * For example, if the request is for a set that contains the 3 sets of
-     * matching symbols, then this loop runs 2 times.
-     */
-    for (let i = 1; i < uniqueSetMultipler; i++) {
-        symbolsSet = symbolsSet.concat(uniqueSymbols);
-    }
+  /**
+   * Next, add another set to our final set as many times as requested.
+   *
+   * For example, if the request is for a set that contains the 3 sets of
+   * matching symbols, then this loop runs 2 times.
+   */
+  for (let i = 1; i < uniqueSetMultipler; i++) {
+    symbolsSet = symbolsSet.concat(uniqueSymbols);
+  }
 
-    return symbolsSet;
+  return symbolsSet;
 };
 
 /**
@@ -69,11 +69,10 @@ CardSymbols.prototype.buildSymbolsSet = function(setSize, uniqueSetMultipler = 2
  * @method
  */
 CardSymbols.prototype.getUniqueSetOfSymbols = function(numberSymbols) {
-    this.shuffle(this._config.symbols);
+  this.shuffle(this._config.symbols);
 
-    return this._config.symbols.slice(0, numberSymbols);
+  return this._config.symbols.slice(0, numberSymbols);
 };
-
 
 /**
  * @description Shuffle the given array
@@ -85,18 +84,18 @@ CardSymbols.prototype.getUniqueSetOfSymbols = function(numberSymbols) {
  *
  * @method
  */
-CardSymbols.prototype.shuffle = function(array){
-    let currentIndex = array.length,
-        temporaryValue,
-        randomIndex;
+CardSymbols.prototype.shuffle = function(array) {
+  let currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-    return array;
+  return array;
 };

@@ -11,12 +11,12 @@
  * @constructor
  */
 const Card = function(el, config) {
-    this.elements = {
-        card: el,
-        icon: el.getElementsByClassName(config.iconClassName)[0]
-    };
-    this._config = config;
-    this._symbol = this.elements.icon.classList[1];
+  this.elements = {
+    card: el,
+    icon: el.getElementsByClassName(config.iconClassName)[0],
+  };
+  this._config = config;
+  this._symbol = this.elements.icon.classList[1];
 };
 
 /**
@@ -27,7 +27,7 @@ const Card = function(el, config) {
  * @method
  */
 Card.prototype.isMatched = function() {
-    return this.elements.card.classList.contains('match');
+  return this.elements.card.classList.contains('match');
 };
 
 /**
@@ -38,7 +38,7 @@ Card.prototype.isMatched = function() {
  * @method
  */
 Card.prototype.isShowing = function() {
-    return this.elements.card.classList.contains('open');
+  return this.elements.card.classList.contains('open');
 };
 
 /**
@@ -49,7 +49,7 @@ Card.prototype.isShowing = function() {
  * @function
  */
 Card.prototype.getSymbol = function() {
-    return this._symbol;
+  return this._symbol;
 };
 
 /**
@@ -57,12 +57,12 @@ Card.prototype.getSymbol = function() {
  * @param {String} symbol New symbol
  */
 Card.prototype.setSymbol = function(symbol) {
-    const currentSymbol = this._symbol;
-    this._symbol = symbol;
+  const currentSymbol = this._symbol;
+  this._symbol = symbol;
 
-    this.elements.icon.classList.replace(currentSymbol, symbol);
+  this.elements.icon.classList.replace(currentSymbol, symbol);
 
-    this.resetCardClassName();
+  this.resetCardClassName();
 };
 
 /**
@@ -71,7 +71,7 @@ Card.prototype.setSymbol = function(symbol) {
  * @method
  */
 Card.prototype.showCard = function() {
-    this.elements.card.classList.add('open', 'show');
+  this.elements.card.classList.add('open', 'show');
 };
 
 /**
@@ -82,19 +82,19 @@ Card.prototype.showCard = function() {
  *
  * @method
  */
-Card.prototype.hideCard = function(animateHide = true){
-    if (! animateHide) {
-        this.resetCardClassName();
-        return;
-    }
+Card.prototype.hideCard = function(animateHide = true) {
+  if (!animateHide) {
+    this.resetCardClassName();
+    return;
+  }
 
-    this.elements.card.classList.add('mismatch');
+  this.elements.card.classList.add('mismatch');
 
-    // Delay 1sec for the animation effect to visually
-    // tell the player the cards are mismatched.
-    window.setTimeout(function () {
-        this.resetCardClassName();
-    }.bind(this), 1000);
+  // Delay 1sec for the animation effect to visually
+  // tell the player the cards are mismatched.
+  window.setTimeout(function () {
+    this.resetCardClassName();
+  }.bind(this), 1000);
 };
 
 /**
@@ -103,7 +103,7 @@ Card.prototype.hideCard = function(animateHide = true){
  * @method
  */
 Card.prototype.resetCardClassName = function() {
-    this.elements.card.classList.remove('match', 'mismatch', 'open', 'show');
+  this.elements.card.classList.remove('match', 'mismatch', 'open', 'show');
 };
 
 /**
@@ -111,6 +111,6 @@ Card.prototype.resetCardClassName = function() {
  *
  * @method
  */
-Card.prototype.setMatched = function(){
-    this.elements.card.classList.add('match');
+Card.prototype.setMatched = function() {
+  this.elements.card.classList.add('match');
 };

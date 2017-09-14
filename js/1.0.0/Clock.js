@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * @description Memory Game Controller
@@ -9,14 +9,14 @@
  * @constructor
  */
 const GameClock = function(config, Controller) {
-    this._config = config;
-    this.controller = Controller;
-    this._timeInterval = null;
-    this.setTimeouts(1);
+  this._config = config;
+  this.controller = Controller;
+  this._timeInterval = null;
+  this.setTimeouts(1);
 
-    this.elements = {
-        timeRemaining: document.getElementsByClassName('time-remaining')[0]
-    };
+  this.elements = {
+    timeRemaining: document.getElementsByClassName('time-remaining')[0],
+  };
 };
 
 /**
@@ -26,7 +26,7 @@ const GameClock = function(config, Controller) {
  * @returns {Number}
  */
 GameClock.prototype.getActualTime = function() {
-    return this._allowableTime - this._timeRemaining;
+  return this._allowableTime - this._timeRemaining;
 };
 
 /**
@@ -35,7 +35,7 @@ GameClock.prototype.getActualTime = function() {
  * @returns {Number}
  */
 GameClock.prototype.getTimeRemaining = function() {
-    return this._timeRemaining;
+  return this._timeRemaining;
 };
 
 /**
@@ -44,7 +44,7 @@ GameClock.prototype.getTimeRemaining = function() {
  * @returns {Boolean}
  */
 GameClock.prototype.isRunning = function() {
-    return this._timeInterval !== null;
+  return this._timeInterval !== null;
 };
 
 /**
@@ -57,8 +57,8 @@ GameClock.prototype.isRunning = function() {
  * @method
  */
 GameClock.prototype.setTimeouts = function(playerLevel = 1) {
-    this._allowableTime = this._config.timeOuts[playerLevel - 1];
-    this._timeRemaining = this._allowableTime;
+  this._allowableTime = this._config.timeOuts[playerLevel - 1];
+  this._timeRemaining = this._allowableTime;
 };
 
 /**
@@ -69,19 +69,19 @@ GameClock.prototype.setTimeouts = function(playerLevel = 1) {
  * @method
  */
 GameClock.prototype.start = function(playerLevel = 1) {
-    this.setTimeouts(playerLevel);
+  this.setTimeouts(playerLevel);
 
-    this._timeInterval = setInterval(function(){
-        this._timeRemaining--;
+  this._timeInterval = setInterval(function() {
+    this._timeRemaining--;
 
-        this.elements.timeRemaining.innerHTML = this._timeRemaining.toString();
+    this.elements.timeRemaining.innerHTML = this._timeRemaining.toString();
 
-        if (this._timeRemaining <= 0) {
-            this.reset(playerLevel);
-            this.controller.timeOut();
-        }
+    if (this._timeRemaining <= 0) {
+      this.reset(playerLevel);
+      this.controller.timeOut();
+    }
 
-    }.bind(this), 1000);
+  }.bind(this), 1000);
 };
 
 /**
@@ -90,7 +90,7 @@ GameClock.prototype.start = function(playerLevel = 1) {
  * @method
  */
 GameClock.prototype.stop = function() {
-    clearInterval(this._timeInterval);
+  clearInterval(this._timeInterval);
 };
 
 /**
@@ -101,11 +101,11 @@ GameClock.prototype.stop = function() {
  * @method
  */
 GameClock.prototype.reset = function(playerLevel = 1) {
-    this.stop();
+  this.stop();
 
-    this.setTimeouts(playerLevel);
+  this.setTimeouts(playerLevel);
 
-    this.elements.timeRemaining.innerHTML = this._allowableTime.toString();
+  this.elements.timeRemaining.innerHTML = this._allowableTime.toString();
 
-    this._timeInterval = null;
+  this._timeInterval = null;
 };

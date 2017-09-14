@@ -1,0 +1,19 @@
+{
+  "name": "beat-the-clock-memory-game",
+  "version": "1.0.0",
+  "description": "Beat the Clock Memory Game",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hellofromtonya/beat-the-clock-memory-game"
+  },
+  "author": "hellofromTonya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hellofromtonya/beat-the-clock-memory-game/issues"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.1",
+    "eslint-config-udacity": "^2.0.2",
+    "eslint-plugin-import": "^2.7.0"
+  }
+}

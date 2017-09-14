@@ -1,0 +1,524 @@
+/*
+ * Base Defaults
+ *-------------------------------------*/
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+    background: #fff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-size: 16px;
+    line-height: 1.625;
+    font-family: 'Coda', cursive;
+    font-weight: 400;
+    text-align: left;
+}
+
+/*
+ * Typography
+ *-------------------------------------*/
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.25;
+    margin: 0 0 20px;
+}
+
+h1 {
+    font-size: 28px;
+    font-size: 2.8rem;
+}
+
+h2 {
+    font-size: 24px;
+    font-size: 2.4rem;
+}
+
+h3 {
+    font-size: 22px;
+    font-size: 2.2rem;
+}
+
+h4 {
+    font-size: 20px;
+    font-size: 2.0rem;
+}
+
+p {
+    margin: 0 0 20px;
+}
+
+a,
+a:active,
+a:focus,
+a:hover {
+    outline: none;
+}
+
+a {
+    color: #02b3e4;
+    transition: all 0.1s ease-in-out;
+    text-decoration: none;
+    border-bottom: 1px dotted;
+    word-wrap: break-word;
+}
+
+a:hover {
+    color: #cb4b14;
+    border-bottom: none;
+}
+
+/*
+ * Layout
+ *-------------------------------------*/
+
+.screen {
+    position: relative;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin: 0 auto;
+    padding: 0;
+    width: 90%;
+
+    perspective: 1000px;
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+.screen-header,
+.screen-footer,
+.screen-content {
+    width: 100%;
+    min-height: 50px;
+    margin: 10px auto;
+    padding: 0;
+}
+
+.screen-header p,
+.screen-footer p {
+    margin-bottom: 0;
+}
+
+.screen .game-control {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.--block {
+    display: block;
+}
+
+/*
+ * Game Screen
+ *-------------------------------------*/
+
+.screen.--game .screen-header,
+.screen.--game .screen-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    text-align: center;
+}
+
+.screen.--game .header-panel {
+    font-size: 13px;
+    text-align: center;
+}
+
+.screen.--game .header-panel.--game-clock h2,
+.screen.--game .header-panel span,
+.stars .fa {
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.header-panel,
+.section-nav li {
+    display: inline-block;
+}
+
+.section-nav ul {
+    padding: 0;
+    margin: 0 10px 0 0;
+}
+
+.section-nav li {
+    list-style: none;
+}
+
+/** Game clock **/
+
+.time-remaining {
+    width: 70px;
+    height: 70px;
+    display: block;
+    background-color: #2e3d49;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 22px;
+    line-height: 50px;
+    text-align: center;
+}
+
+/** Game Footer Navigation **/
+
+.section-nav li {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #2e3d49;
+}
+
+.section-nav li:hover {
+    background-color: #cc0000;
+}
+
+.section-nav .fa,
+.section-nav a {
+    color: #fff;
+    border-bottom: none;
+}
+
+
+/*
+ * Deck and Cards
+ *-------------------------------------*/
+
+.deck {
+    padding: 0;
+    margin: 0 auto;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    margin-bottom: 20px;
+    background-color: #2e3d49;
+
+    font-size: 0;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    cursor: pointer;
+
+    /** center the symbol in the card */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /** flip animation */
+    transition: 0.7s;
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+}
+
+/** Card Flipper **/
+
+.deck .card.open {
+    transform: rotateY(0);
+    background: #02b3e4;
+}
+
+.deck .card.show,
+.deck .card.match {
+    cursor: default;
+    font-size: 33px;
+}
+
+.deck .card.match {
+    background: #02ccba;
+    animation: 1s rubberBand;
+}
+
+.deck .card.mismatch {
+    background-color: #cc0000;
+    animation: 1s wobble;
+}
+
+/*
+ * Help Screen
+ *-------------------------------------*/
+
+.screen.--help .screen-header,
+.screen.--help .screen-footer {
+    margin: 40px auto 20px;
+}
+
+.screen.--help .screen-header .game-control {
+    margin: 0 30px 40px 0;
+}
+
+.screen.--help .game-control:hover {
+    color: #cc0000;
+}
+
+/*
+ * Modals
+ *-------------------------------------*/
+.modal {
+    display: none;
+
+    text-align: center;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 10px;
+
+    font-size: 20px;
+    font-size: 2.0rem;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.modal.--lost-game {
+    background-color: #cc0000;
+    color: #fff;
+}
+
+.modal.active {
+    max-width: 100%;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+
+    animation: 1s fadeIn;
+}
+
+.modal .loader {
+    font-size: 60px;
+    font-weight: 100;
+    color: green;
+
+    animation: 1s scaleBigText 1s;
+}
+
+.modal.--lost-game .loader {
+    color: #fff;
+}
+
+.modal-levelup {
+    background-color: slateblue;
+    padding: 10px;
+    color: #fff;
+}
+
+.modal .button {
+    color: #fff;
+    background-color: green;
+    border: 1px solid green;
+
+    cursor: pointer;
+    font-weight: 400;
+    letter-spacing: 1px;
+    padding: 16px 24px;
+    width: auto;
+    border-radius: 5px;
+}
+
+.modal .button:hover {
+    background-color: #fff;
+    color: green;
+}
+
+/* Rising Notification */
+.rising-notification {
+    display: block;
+    position: absolute;
+
+    animation: riseUp 3s linear 0.5s normal 1 both;
+
+    font-size: 200%;
+    color: slateblue;
+}
+
+/*
+ * Keyframes - from animate.css
+ *-------------------------------------*/
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes riseUp {
+    from {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    100% {
+        -webkit-transform: translateY(-1750px);
+        transform: translateY(-1750px);
+    }
+}
+
+@keyframes rubberBand {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    40% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    50% {
+        transform: scale3d(1.15, 0.85, 1);
+    }
+
+    65% {
+        transform: scale3d(.95, 1.05, 1);
+    }
+
+    75% {
+        transform: scale3d(1.05, .95, 1);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes wobble {
+    from {
+        transform: none;
+    }
+
+    15% {
+        transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
+    }
+
+    30% {
+        transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+    }
+
+    45% {
+        transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    }
+
+    60% {
+        transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
+    }
+
+    75% {
+        transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
+    }
+
+    to {
+        transform: none;
+    }
+}
+
+@keyframes scaleBigText {
+    from {
+        font-size: 60px;
+    }
+
+    50% {
+        font-size: 120px;
+    }
+}
+
+/*
+ * Media Queries
+ *-------------------------------------*/
+
+@media screen and (min-width: 560px) {
+    .deck {
+        max-width: 600px;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+
+    .screen {
+        max-width: 800px;
+    }
+
+    .game-controls .block:nth-of-type(2) p {
+        font-size: 16px;
+        font-size: 1.6rem;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .screen {
+        width: 100%;
+        max-width: 1180px;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .deck {
+        max-width: 680px;
+    }
+
+    .deck .card {
+        height: 150px;
+        width: 150px;
+    }
+}
