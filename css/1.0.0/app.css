@@ -23,7 +23,7 @@ body {
 
 body {
     position: relative;
-    background: #fff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #fff url('../../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-size: 16px;
     line-height: 1.625;
     font-family: 'Coda', cursive;
