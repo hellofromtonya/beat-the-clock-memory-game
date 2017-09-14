@@ -11,7 +11,6 @@ const View = function(config) {
   this._config = config;
 
   this.elements = {
-    body: document.getElementsByTagName('body')[0],
     deck: document.getElementsByClassName(this._config.cardParentClassName)[0],
     moves: document.getElementsByClassName('moves')[0],
     level: document.getElementsByClassName('player-level')[0],
