@@ -110,17 +110,17 @@ a:hover {
     transition: transform 0.5s;
 }
 
-.screen-header,
-.screen-footer,
-.screen-content {
+.screen__header,
+.screen__footer,
+.screen__content {
     width: 100%;
     min-height: 50px;
     margin: 10px auto;
     padding: 0;
 }
 
-.screen-header p,
-.screen-footer p {
+.screen__header p,
+.screen__footer p {
     margin-bottom: 0;
 }
 
@@ -132,7 +132,7 @@ a:hover {
     display: none;
 }
 
-.--block {
+.block {
     display: block;
 }
 
@@ -140,8 +140,8 @@ a:hover {
  * Game Screen
  *-------------------------------------*/
 
-.screen.--game .screen-header,
-.screen.--game .screen-footer {
+.screen__game .screen__header,
+.screen__game .screen__footer {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -149,29 +149,29 @@ a:hover {
     text-align: center;
 }
 
-.screen.--game .header-panel {
+.screen__game .header__panel {
     font-size: 13px;
     text-align: center;
 }
 
-.screen.--game .header-panel.--game-clock h2,
-.screen.--game .header-panel span,
+.screen__game .header__game-clock h2,
+.screen__game .header__panel span,
 .stars .fa {
     font-size: 18px;
     margin-bottom: 0;
 }
 
-.header-panel,
-.section-nav li {
+.header__panel,
+.screen__nav li {
     display: inline-block;
 }
 
-.section-nav ul {
+.screen__nav ul {
     padding: 0;
     margin: 0 10px 0 0;
 }
 
-.section-nav li {
+.screen__nav li {
     list-style: none;
 }
 
@@ -193,7 +193,7 @@ a:hover {
 
 /** Game Footer Navigation **/
 
-.section-nav li {
+.screen__nav li {
     width: 50px;
     height: 50px;
     font-size: 22px;
@@ -204,12 +204,12 @@ a:hover {
     background-color: #2e3d49;
 }
 
-.section-nav li:hover {
+.screen__nav li:hover {
     background-color: #cc0000;
 }
 
-.section-nav .fa,
-.section-nav a {
+.screen__nav .fa,
+.screen__nav a {
     color: #fff;
     border-bottom: none;
 }
@@ -279,16 +279,16 @@ a:hover {
  * Help Screen
  *-------------------------------------*/
 
-.screen.--help .screen-header,
-.screen.--help .screen-footer {
+.screen__help .screen__header,
+.screen__help .screen-footer {
     margin: 40px auto 20px;
 }
 
-.screen.--help .screen-header .game-control {
+.screen__help .screen__header .game-control {
     margin: 0 30px 40px 0;
 }
 
-.screen.--help .game-control:hover {
+.screen__help .game-control:hover {
     color: #cc0000;
 }
 
@@ -315,7 +315,7 @@ a:hover {
     bottom: 0;
 }
 
-.modal.--lost-game {
+.modal__lost-game {
     background-color: #cc0000;
     color: #fff;
 }
@@ -343,11 +343,11 @@ a:hover {
     animation: 1s scaleBigText 1s;
 }
 
-.modal.--lost-game .loader {
+.modal__lost-game .loader {
     color: #fff;
 }
 
-.modal-levelup {
+.modal__levelup {
     background-color: slateblue;
     padding: 10px;
     color: #fff;

@@ -8,40 +8,40 @@
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet prefetch" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
-    <link rel="stylesheet" href="css/0.0.2/app.css">
+    <link rel="stylesheet" href="css/0.0.3/app.css">
 </head>
 <body class="playing">
 
 <!-- Game Screen -->
-<section id="game" class="screen --game">
-    <header class="screen-header">
-        <div class="header-panel">
-            <span class="stars --block">
+<section id="game" class="screen screen__game">
+    <header class="screen__header">
+        <div class="header__panel">
+            <span class="stars block">
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
             </span>
         </div>
 
-        <div class="header-panel">
-            <p><span class="moves --block">0</span> moves</p>
+        <div class="header__panel">
+            <p><span class="moves block">0</span> moves</p>
         </div>
 
-        <div class="header-panel --game-clock">
+        <div class="header__panel header__game-clock">
             <h2>Beat the Clock</h2>
-            <div class="game-clock"><span class="time-remaining --block">120</span> secs</div>
+            <div class="game-clock"><span class="time-remaining block">120</span> secs</div>
         </div>
 
-        <div class="header-panel">
-            <p><span class="player-level --block">1</span> level</p>
+        <div class="header__panel">
+            <p><span class="player-level block">1</span> level</p>
         </div>
 
-        <div class="header-panel">
-            <p><span class="score --block">0</span> score</p>
+        <div class="header__panel">
+            <p><span class="score block">0</span> score</p>
         </div>
     </header>
 
-    <div class="screen-content">
+    <div class="screen__content">
         <ul class="deck">
             <li class="card">
                 <i class="fa fa-diamond"></i>
@@ -94,8 +94,8 @@
         </ul>
     </div>
 
-    <footer class="screen-footer">
-        <nav class="section-nav">
+    <footer class="screen__footer">
+        <nav class="screen__nav">
             <ul>
                 <li class="game-control" data-control="startNewGame">
                     <i class="fa fa-repeat" aria-hidden="true"></i>
@@ -109,13 +109,13 @@
 </section>
 
 <!-- 'Game Over' Modal -->
-<section id="game-over-modal" class="modal --won-game">
+<section id="game-over-modal" class="modal modal__won-game">
     <div class="modal-content">
         <div class="loader">
             <i class="fa fa-check" aria-hidden="true"></i>
         </div>
         <h2>Congratulations! You Won!</h2>
-        <div class="modal-messages">
+        <div class="modal__messages">
             <!-- messages inserted programmatically here -->
         </div>
 
@@ -125,8 +125,8 @@
 </section>
 
 <!-- 'You lost' Modal -->
-<section id="timed-out" class="modal --lost-game">
-    <div class="modal-content">
+<section id="timed-out" class="modal modal__lost-game">
+    <div class="modal__content">
         <div class="loader">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
         </div>
@@ -138,8 +138,8 @@
 </section>
 
 <!-- Help Screen -->
-<section id="help" class="screen --help hide">
-    <header class="screen-header">
+<section id="help" class="screen screen__help hide">
+    <header class="screen__header">
         <nav class="game-control" data-section-id="game">
             <i class="fa fa-hand-o-left" aria-hidden="true"></i> Back to the Game
         </nav>
@@ -147,7 +147,7 @@
         <h2>Help for Beat the Clock Game</h2>
     </header>
 
-    <div class="screen-content">
+    <div class="screen__content">
         <p>Welcome to the "Beat the Clock Game."  In this game, you are presented with a deck of 16 cards, which are face down.  Each card has a symbol on it which matches one other card in the deck.</p>
         <p>Your objective is to match each of the cards before the game clock runs out.</p>
 
@@ -170,7 +170,7 @@
         <p>There are multiple levels in this game.  If you beat the clock in the required number of moves and minimum score, you will automatically advance to the next level.</p>
     </div>
 
-    <footer class="screen-footer">
+    <footer class="screen__footer">
         <nav class="game-control" data-section-id="game">
             <i class="fa fa-hand-o-left" aria-hidden="true"></i> Back to the Game
         </nav>
@@ -179,13 +179,13 @@
 </section>
 
 <!-- Scripts - typically I would concatenate and minify into one script. -->
-<script src="js/0.0.2/config.js"></script>
-<script src="js/0.0.2/Symbols.js"></script>
-<script src="js/0.0.2/Card.js"></script>
-<script src="js/0.0.2/Player.js"></script>
-<script src="js/0.0.2/View.js"></script>
-<script src="js/0.0.2/Game.js"></script>
-<script src="js/0.0.2/Clock.js"></script>
-<script src="js/0.0.2/app.js"></script>
+<script src="js/0.0.3/config.js"></script>
+<script src="js/0.0.3/Symbols.js"></script>
+<script src="js/0.0.3/Card.js"></script>
+<script src="js/0.0.3/Player.js"></script>
+<script src="js/0.0.3/View.js"></script>
+<script src="js/0.0.3/Game.js"></script>
+<script src="js/0.0.3/Clock.js"></script>
+<script src="js/0.0.3/app.js"></script>
 </body>
 </html>

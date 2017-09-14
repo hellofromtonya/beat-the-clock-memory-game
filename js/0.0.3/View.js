@@ -19,7 +19,6 @@ const View = function(config) {
     gameOverModal: document.getElementById('game-over-modal'),
     timedOutModal: document.getElementById('timed-out'),
     stars: document.querySelectorAll('.stars i'),
-    gameSetup: document.getElementById('game-setup-sidebar'),
     timeRemaining: document.getElementsByClassName('time-remaining')[0]
   };
 };

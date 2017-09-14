@@ -74,7 +74,7 @@ const getGameConfig = function () {
         minMoves: 21,
         minScore: 4800,
       },
-      // 0.0.2 stars minimum
+      // 0.0.3 stars minimum
       {
         minMoves: 17,
         minScore: 4800,
@@ -107,9 +107,9 @@ const getGameConfig = function () {
       inactive: 'fa-star-o'
     },
     gameOverModal: {
-      targetClassName: 'modal-messages',
-      messageHTML: '<p class="modal-results">You did it in %seconds% seconds and %moves% moves.  You earned %stars% and %score% points.</p>',
-      levelUpHTML: '<p class="modal-levelup">WooHoo! You just leveled up to Level %level%!</p><div class="rising-notification"><i class="fa fa-star"></i></div>'
+      targetClassName: 'modal__messages',
+      messageHTML: '<p class="modal__results">You did it in %seconds% seconds and %moves% moves.  You earned %stars% and %score% points.</p>',
+      levelUpHTML: '<p class="modal__levelup">WooHoo! You just leveled up to Level %level%!</p><div class="rising-notification"><i class="fa fa-star"></i></div>'
     }
   };
 

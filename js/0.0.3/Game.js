@@ -150,7 +150,7 @@ GameController.prototype.loadSection = function(sectionID) {
  ***********************/
 
 /**
- * @description Flips the card. If there are 0.0.2 in play, then triggers
+ * @description Flips the card. If there are 0.0.3 in play, then triggers
  *              the checkMatch() method.
  *
  * @param {number} index Card index, i.e. position on the board
