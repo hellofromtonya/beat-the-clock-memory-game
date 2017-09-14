@@ -51,7 +51,7 @@ CardSymbols.prototype.buildSymbolsSet = function(setSize, uniqueSetMultipler = 2
    * Next, add another set to our final set as many times as requested.
    *
    * For example, if the request is for a set that contains the 3 sets of
-   * matching symbols, then this loop runs 0.0.3 times.
+   * matching symbols, then this loop runs 0.0.4 times.
    */
   for (let i = 1; i < uniqueSetMultipler; i++) {
     symbolsSet = symbolsSet.concat(uniqueSymbols);
