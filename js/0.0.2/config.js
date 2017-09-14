@@ -90,7 +90,7 @@ const getGameConfig = function () {
       minMoves: 8, // Won the game in at least 8 moves, i.e. to ensure s/he played.
 
       // if the play won with these stats, then level up:
-      moves: 13,
+      moves: 14,
       score: 18000,
       stars: 3
     }
