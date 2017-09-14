@@ -74,7 +74,7 @@ const getGameConfig = function () {
         minMoves: 21,
         minScore: 4800,
       },
-      // 2 stars minimum
+      // 0.0.2 stars minimum
       {
         minMoves: 17,
         minScore: 4800,

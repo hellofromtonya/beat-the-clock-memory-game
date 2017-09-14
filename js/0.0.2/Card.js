@@ -60,7 +60,8 @@ Card.prototype.setSymbol = function(symbol) {
   const currentSymbol = this._symbol;
   this._symbol = symbol;
 
-  this.elements.icon.classList.replace(currentSymbol, symbol);
+  this.elements.icon.classList.remove(currentSymbol);
+  this.elements.icon.classList.add(symbol);
 
   this.resetCardClassName();
 };

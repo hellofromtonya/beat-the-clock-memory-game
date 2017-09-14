@@ -134,7 +134,8 @@ View.prototype.updateStars = function(numberStars) {
     }
 
     if (!star.classList.contains(this._config.stars[replaceWith])) {
-      star.classList.replace(this._config.stars[toReplace], this._config.stars[replaceWith]);
+      star.classList.remove(this._config.stars[toReplace]);
+      star.classList.add(this._config.stars[replaceWith]);
     }
   }, this);
 

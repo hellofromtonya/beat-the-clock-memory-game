@@ -35,3 +35,4 @@ gameApp.initialize(
 
 gameApp.registerEventListeners();
 gameApp.startNewGame();
+
