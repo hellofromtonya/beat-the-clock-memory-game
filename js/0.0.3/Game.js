@@ -42,6 +42,7 @@ GameController.prototype.initialize = function(
   this.player = player;
   this.cardSymbols = cardSymbols;
   this.view = view;
+  this._inPlay = false;
 };
 
 /**
@@ -86,6 +87,11 @@ GameController.prototype.registerEventListeners = function() {
         !event.target.classList.contains('match')) {
       const index = Array.from(event.target.parentNode.children).
           indexOf(event.target);
+
+      // Prevent flipping cards over when 2 cards are in play.
+      if (this._inPlay) {
+        return false;
+      }
 
       if (!this.gameClock.isRunning()) {
         this.gameClock.start(this.player.getLevel());
@@ -169,6 +175,7 @@ GameController.prototype.flipCard = function(index) {
   this._cardsInPlay.push(index);
 
   if (this._cardsInPlay.length === this._requiredMatches) {
+    this._inPlay = true;
     window.setTimeout(this.checkMatch.bind(this), 500);
   }
 };
@@ -200,6 +207,7 @@ GameController.prototype.checkMatch = function() {
   }
 
   // reset the cards in play array.
+  this._inPlay = false;
   this._cardsInPlay = [];
 };
 
