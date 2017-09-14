@@ -57,8 +57,7 @@ Player.prototype.resetStats = function(hardReset = false) {
  *
  * @method
  */
-Player.prototype.tallyGameStats = function(
-    gameTimeSeconds, skipLevelUp = false) {
+Player.prototype.tallyGameStats = function(gameTimeSeconds, skipLevelUp = false) {
   const canLevelUp = !skipLevelUp ? this.canLevelUp() : false;
 
   if (canLevelUp) {
@@ -217,7 +216,7 @@ Player.prototype.setMatched = function() {
  */
 Player.prototype.setStars = function() {
   // Player at minimum. Bail out as there's nothing to do.
-  if (this._stars === 0) {
+  if (this._stars === 1) {
     return;
   }
 
@@ -225,6 +224,7 @@ Player.prototype.setStars = function() {
   if (this._haveStarsChanged) {
     this._haveStarsChanged = false;
   }
+
   // Player is not at the next minimum moves threshold. Bail out.
   if (this._moves !== this._config.starsRules[this._stars - 1].minMoves) {
     return;
